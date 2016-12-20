@@ -13,8 +13,7 @@ class Auth extends MY_Controller {
 		}
 	}
 
-	public function index()
-	{	
+	public function index() {
 		$this->logged_in_check();
 		
 		$this->load->library('form_validation');
@@ -46,6 +45,40 @@ class Auth extends MY_Controller {
 		$this->load->view("auth");
 		$this->load->view("footer");
 	}
+
+	public function registration() {
+	    $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('first_name', 'Имя', 'trim|required');
+        $this->form_validation->set_rules('last_name', 'Фамилия', 'trim|required');
+        $this->form_validation->set_rules('email', 'Электронная почта', 'trim|required|valid_email|callback_email_check');
+        $this->form_validation->set_rules('username', 'Логин', 'trim|required|min_length[4]|callback_username_check');
+        $this->form_validation->set_rules('password', 'Пароль', 'trim|required|min_length[4]|max_length[8]');
+        $this->form_validation->set_rules('password_confirm', 'Подтвердить пароль', 'trim|required|matches[password]');
+
+        if($this->form_validation->run() === false) {
+            $this->load->view("header");
+            $this->load->view("registration");
+            $this->load->view("footer");
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function email_check()
+    {
+        return false;
+    }
+
+    public function username_check($str) {
+        if ($str == 'test') {
+            $this->form_validation->set_message('username_check', 'The {field} field can not be the word "test"');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
 
 	public function logout()
 	{

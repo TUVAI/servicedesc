@@ -16,8 +16,6 @@ class MY_Controller extends CI_Controller {
 	{
 		parent::__construct();
 
-        $this->load->helper('url');
-        $this->load->library('session');
 		$this->login_check();
 	}
 

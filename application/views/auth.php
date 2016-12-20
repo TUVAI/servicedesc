@@ -36,6 +36,7 @@
                   <?php echo $error; ?>
   							</div>
   							<input type="submit" value="Login" class="btn btn-primary">
+						<?= anchor('auth/registration', 'Регистрация', array('title' => 'Зарегистрироваться'));?>
   						<?php echo form_close(); ?>
   					</div>
   				</div>
