@@ -47,6 +47,7 @@ class MY_Controller extends CI_Controller {
 			$access = is_array($this->access) ? 
 				$this->access :
 				explode(",", $this->access);
+
 			if (in_array($this->session->userdata("role"), array_map("trim", $access)) ) {
 				return true;
 			}

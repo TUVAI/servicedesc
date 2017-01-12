@@ -6,15 +6,22 @@ class Auth_model extends CI_Model {
         $this->load->database();
     }
 
-	private $table = "user";
+	private $table = "users";
 	private $_data = array();
 
-	public function validate()
-	{
+	public function validate() {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
-		$this->db->where("username", $username);
+		$this->db->select('password, role.name as role, login,
+                          lname, fname, sname,
+                          email, phone,
+                          company_id, department_id, position_id');
+		$this->db->where("login", $username);
+		$this->db->or_where("email", $username);
+
+        $this->db->join('role', $this->table . '.role_id = role.id', 'left');
+
 		$query = $this->db->get($this->table);
 
 		if ($query->num_rows()) 
@@ -23,8 +30,7 @@ class Auth_model extends CI_Model {
 			$row = $query->row_array();
 
 			// now check for the password
-			if ($row['password'] == sha1($password)) 
-			{
+			if ($row['password'] == sha1($password)) {
 				// we not need password to store in session
 				unset($row['password']);
 				$this->_data = $row;
@@ -40,7 +46,71 @@ class Auth_model extends CI_Model {
 		}
 	}
 
-	public function get_data()
+	function validate_registration() {
+	    $this->db->where('login', $this->input->post('login'));
+	    $this->db->where('password', sha1($this->input->post('password')));
+
+        $query = $this->db->get('users');
+
+        if ($query->num_rows == 1) {
+            return true;
+        }
+    }
+
+    //добавить пользователя в базу
+    function create_member() {
+        $new_member_insert_data = array(
+            'fname' => $this->input->post('fname'),
+            'lname' => $this->input->post('lname'),
+            'sname' => $this->input->post('sname'),
+            'email' => $this->input->post('email'),
+            'phone' => $this->input->post('phone'),
+            'login' => $this->input->post('username'),
+            'role_id' => 6,
+            'company_id' => 1,
+            'departmen_id' => 1,
+            'position_id' => 1,
+            'password' => sha1($this->input->post('password'))
+        );
+
+        $insert = $this->db->insert('users', $new_member_insert_data);
+        return $insert;
+    }
+
+    function add_company() {
+        $new_member_insert_data = array(
+            'name' => $this->input->post('name'),
+            'fullname' => $this->input->post('fullname'),
+            'shortname' => $this->input->post('shortname'),
+        );
+
+        $insert = $this->db->insert('company', $new_member_insert_data);
+        return $insert;
+    }
+
+    function check_login_exist($login) {
+        $this->db->where('login', $login);
+        $result = $this->db->get('users');
+
+        if ($result->num_rows() > 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    function check_email_exist($email) {
+        $this->db->where('email', $email);
+        $result = $this->db->get('users');
+
+        if ($result->num_rows() > 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function get_data()
 	{
 		return $this->_data;
 	}

@@ -6,11 +6,11 @@
   						<strong>Login Form</strong>
   					</div>
   					<div class="panel-body">  
-              <?php $error = $this->session->flashdata("error"); ?>
-  						<div class="alert alert-<?php echo $error ? 'warning' : 'info' ?> alert-dismissible" role="alert">
+              <?php /*$error = $this->session->flashdata("error"); */?><!--
+  						<div class="alert alert-<?php /*echo $error ? 'warning' : 'info' */?> alert-dismissible" role="alert">
   						  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  						  <?php echo $error ? $error : 'Enter your username and password' ?>
-  						</div>
+  						  <?php /*echo $error ? $error : 'Enter your username and password' */?>
+  						</div>-->
 
   						<?php echo form_open(); ?>  
                 <?php $error = form_error("username", "<p class='text-danger'>", '</p>'); ?>              
@@ -20,7 +20,7 @@
   									<span class="input-group-addon">
   										<i class="glyphicon glyphicon-user"></i>
   									</span>
-  									<input type="text" name="username" value="<?php echo set_value("username") ?>" id="username" class="form-control">
+  									<input type="text" name="username" value="<?php echo set_value("username") ?>" id="username" class="form-control" placeholder="Username or email">
   								</div>  
                   <?php echo $error; ?>
   							</div>
@@ -31,7 +31,7 @@
   									<span class="input-group-addon">
   										<i class="glyphicon glyphicon-lock"></i>
   									</span>
-  									<input type="password" name="password" id="password" class="form-control">
+  									<input type="password" name="password" id="password" class="form-control" placeholder="Password">
   								</div> 
                   <?php echo $error; ?>
   							</div>
