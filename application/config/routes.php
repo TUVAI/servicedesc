@@ -52,4 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-//$route['(:any)'] = 'pages/view/$1';
+$route['admin/edit_company/(:num)'] = 'admin/edit_company/$1';
+$route['admin/del_company/(:num)'] = 'admin/del_company/$1';
+$route['admin/add_department/(:num)'] = 'admin/add_department/$1';

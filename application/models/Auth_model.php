@@ -77,6 +77,27 @@ class Auth_model extends CI_Model {
         return $insert;
     }
 
+    function add_department() {
+        $new_member_insert_data = array(
+            'company_id' => $this->input->post('company_id'),
+            'fullname' => $this->input->post('fullname'),
+            'shortname' => $this->input->post('shortname'),
+        );
+
+        $insert = $this->db->insert('department', $new_member_insert_data);
+        return $insert;
+    }
+
+    function get_company($id) {
+        $result = $this->db->get_where('company', array('id' => $id), 1);
+        return $result->row_array();
+    }
+
+    function get_companies() {
+        $result = $this->db->get('company');
+        return $result->result_array();
+    }
+
     function add_company() {
         $new_member_insert_data = array(
             'name' => $this->input->post('name'),
@@ -87,6 +108,25 @@ class Auth_model extends CI_Model {
         $insert = $this->db->insert('company', $new_member_insert_data);
         return $insert;
     }
+
+    function edit_company($id) {
+        $new_member_insert_data = array(
+            'name' => $this->input->post('name'),
+            'fullname' => $this->input->post('fullname'),
+            'shortname' => $this->input->post('shortname'),
+        );
+
+        $this->db->set($new_member_insert_data);
+        $this->db->where('id', $id);
+        $update = $this->db->update('company');
+        return $update;
+    }
+
+    function del_company($id) {
+        $delete = $this->db->delete('company', array('id' => $id));
+        return $delete;
+    }
+
 
     function check_login_exist($login) {
         $this->db->where('login', $login);
