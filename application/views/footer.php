@@ -4,10 +4,10 @@
     </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="assets/js/jquery.min.js"><\/script>')</script>
-    
+    <script src="/assets/js/jquery.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/jquery.js"><\/script>')</script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo $cfg['base_url']; ?>assets/js/bootstrap.min.js"></script>
-  </body>
+    <script src="/assets/js/main.js"></script>
+</body>
 </html>

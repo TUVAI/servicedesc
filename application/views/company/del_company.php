@@ -2,9 +2,6 @@
 <br>
 <br>
 <br>
-<pre>
-<? var_dump($company) ?>
-    </pre>
 <div class="container" style="margin-top: 80px">
     <? if (isset($info)) { ?>
         <div class="alert alert-success">
@@ -15,7 +12,7 @@
         <div class="col-md-4 col-xs-6 col-md-offset-4 col-xs-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <strong>Добавить компанию</strong>
+                    <strong>Удалить компанию</strong>
                 </div>
                 <div class="panel-body">
                     <?php echo form_open('admin/del_company/' . $company['id']); ?>

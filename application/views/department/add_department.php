@@ -1,10 +1,3 @@
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<? var_dump($companies); ?>
-<? var_dump($companies_select); ?>
 <div class="container" style="margin-top: 80px">
     <? if (isset($info)) { ?>
         <div class="alert alert-success">
@@ -26,7 +19,7 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-user"></i>
                             </span>
-                            <?= form_dropdown('company_id', $companies_select, 'class="form-control" placeholder="Имя компании"')?>
+                            <?= form_dropdown('company_id', $companies_select, array(), 'class="form-control"')?>
                         </div>
                         <?= $errorName; ?>
                     </div>

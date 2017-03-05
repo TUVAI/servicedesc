@@ -88,6 +88,11 @@ class Auth_model extends CI_Model {
         return $insert;
     }
 
+    function get_user($id) {
+        $result = $this->db->get_where('users', array('id' => $id), 1);
+        return $result->row_array();
+    }
+
     function get_company($id) {
         $result = $this->db->get_where('company', array('id' => $id), 1);
         return $result->row_array();
@@ -95,6 +100,28 @@ class Auth_model extends CI_Model {
 
     function get_companies() {
         $result = $this->db->get('company');
+        return $result->result_array();
+    }
+
+    function get_departments($company_id) {
+        $this->db->where('company_id', $company_id);
+        $result = $this->db->get('department');
+
+        return $result->result_array();
+    }
+
+    function get_all_departments() {
+        $result = $this->db->get('department');
+        return $result->result_array();
+    }
+
+    function get_positions() {
+        $result = $this->db->get('position');
+        return $result->result_array();
+    }
+
+    function get_roles() {
+        $result = $this->db->get('role');
         return $result->result_array();
     }
 
@@ -125,6 +152,38 @@ class Auth_model extends CI_Model {
     function del_company($id) {
         $delete = $this->db->delete('company', array('id' => $id));
         return $delete;
+    }
+
+    function del_user($id) {
+        $delete = $this->db->delete('users', array('id' => $id));
+        return $delete;
+    }
+
+    function edit_user($id) {
+        $this->db->where('id', $id);
+        $user = $this->db->get('users');
+        $user = $user->row_array();
+
+        $new_member_insert_data = array(
+            'lname' => $this->input->post('lname'),
+            'fname' => $this->input->post('fname'),
+            'sname' => $this->input->post('sname'),
+            'phone' => $this->input->post('phone'),
+            'company_id' => $this->input->post('company_id'),
+            'department_id' => $this->input->post('department_id'),
+            'position_id' => $this->input->post('position_id'),
+            'role_id' => $this->input->post('role_id'),
+        );
+
+        if ($user['email'] !== $this->input->post('email')) {
+            $new_member_insert_data['email'] = $this->input->post('email');
+        }
+        $this->db->set($new_member_insert_data);
+        $this->db->where('id', $id);
+        $this->db->where('login', $this->input->post('username'));
+        $update = $this->db->update('users');
+
+        return $update;
     }
 
 
