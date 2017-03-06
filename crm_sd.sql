@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Jan 12, 2017 at 10:15 AM
+-- Generation Time: Mar 06, 2017 at 11:10 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -45,16 +45,16 @@ CREATE TABLE `company` (
   `fullname` varchar(99) NOT NULL COMMENT 'Полное имя',
   `shortname` varchar(50) NOT NULL COMMENT 'Короткое имя',
   `name` varchar(50) NOT NULL COMMENT 'Имя'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `company`
 --
 
 INSERT INTO `company` (`id`, `fullname`, `shortname`, `name`) VALUES
-(1, 'не задано', 'не задано', 'не задано'),
-(2, 'ООО Заря', 'Заря', 'Заря'),
-(3, 'ОАО Терем', 'Терем короткий', 'Терем');
+(1, 'не за3дано', 'не за1дано', 'не з2адано'),
+(3, 'ОАО Терем', 'Терем короткий', 'Терем'),
+(4, 'Реактив', 'Р', 'РКТВ5');
 
 -- --------------------------------------------------------
 
@@ -67,14 +67,17 @@ CREATE TABLE `department` (
   `fullname` varchar(90) NOT NULL,
   `shortname` varchar(50) NOT NULL,
   `company_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `department`
 --
 
 INSERT INTO `department` (`id`, `fullname`, `shortname`, `company_id`) VALUES
-(1, 'не задано', 'не задано', 1);
+(1, 'не задано', 'не задано', 1),
+(2, 'Бухгалтерия', 'Зодчий короткий', 3),
+(3, 'тестеры', 'тестеры', 3),
+(4, 'информационные технологии', 'ИТ', 3);
 
 -- --------------------------------------------------------
 
@@ -159,15 +162,14 @@ CREATE TABLE `users` (
   `department_id` int(11) NOT NULL COMMENT 'Подразделение',
   `company_id` int(11) NOT NULL COMMENT 'Организация',
   `role_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `sname`, `email`, `phone`, `login`, `password`, `position_id`, `department_id`, `company_id`, `role_id`) VALUES
-(5, 'John', 'Dow', 'Xl', 'test@test.ru', '884455', 'test', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 1, 1, 1, 1),
-(6, 'Ivan', 'Petrov', 'Xl', 'test2@test.ru', '445566', 'test2', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 1, 1, 1, 6);
+(5, 'Евгений', 'Dow', 'Федорович', 'test@test.ru', '884455', 'test', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 1, 1, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -235,12 +237,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `position`
 --
@@ -260,7 +262,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
