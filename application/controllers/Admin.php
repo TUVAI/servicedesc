@@ -28,6 +28,10 @@ class Admin extends MY_Controller {
         $users = $this->db->get('users');
         $data['users'] = $users->result_array();
 
+        $this->db->select('id, name');
+        $positions = $this->db->get('position');
+        $data['positions'] = $positions->result_array();
+
 
 		$this->load->view("header");
 		$this->load->view("navbar");
@@ -135,6 +139,28 @@ class Admin extends MY_Controller {
         $this->load->view("footer");
     }
 
+    public function add_position() {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('name', 'Название должности', 'trim|required|is_unique[position.name]');
+
+        $data['info'] = $this->session->flashdata('info');
+
+        $this->load->model('auth_model');
+        if($this->form_validation->run() === true) {
+            if($this->auth_model->add_position()) {
+                $this->session->set_flashdata('info', 'Должность добавлена');
+
+                redirect(current_url());
+            }
+        }
+
+        $this->load->view("header");
+        $this->load->view("navbar");
+        $this->load->view("/position/add_position");
+        $this->load->view("footer");
+    }
+
 	public function add_company() {
         $this->load->library('form_validation');
 
@@ -156,6 +182,30 @@ class Admin extends MY_Controller {
         $this->load->view("header");
         $this->load->view("navbar");
         $this->load->view("/company/add_company", $data);
+        $this->load->view("footer");
+    }
+
+    public function edit_position($id) {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('name', 'Имя', 'trim|required');
+
+        $data['info'] = $this->session->flashdata('info');
+
+        $this->load->model('auth_model');
+        if($this->form_validation->run() === true) {
+            if($this->auth_model->edit_position($id)) {
+                $this->session->set_flashdata('info', 'Должность отредактирована');
+
+                redirect(current_url());
+            }
+        }
+
+        $data['position'] = $this->auth_model->get_position($id);
+
+        $this->load->view("header");
+        $this->load->view("navbar");
+        $this->load->view("/position/edit_position", $data);
         $this->load->view("footer");
     }
 

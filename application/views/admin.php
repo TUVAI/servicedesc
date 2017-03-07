@@ -4,6 +4,7 @@
   	</div>
   <?= anchor('admin/add_company', 'Добавить компанию', array('title' => 'Добавить компанию', 'class' => 'btn btn-success'));?>
   <?= anchor('admin/add_department', 'Добавить отдел', array('title' => 'Добавить отдел', 'class' => 'btn btn-success'));?>
+  <?= anchor('admin/add_position', 'Добавить должность', array('title' => 'Добавить должность', 'class' => 'btn btn-success'));?>
   <br><br>
   <div class="clear"></div>
   <table class="table" style="width: auto">
@@ -48,10 +49,16 @@
     <?php endforeach; ?>
   </table>
 
-</select>
-	  <div class="well">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-			Nemo repudiandae quis fugiat numquam eveniet voluptate ullam cupiditate earum officiis, modi, repellendus vero animi et.
-			Porro corporis inventore ducimus voluptates necessitatibus.</p>
-	  </div>
-  </div>
+  <table class="table" style="width: auto">
+    <tr>
+      <th>Должность</th>
+      <th>Редактировать</th>
+    </tr>
+      <?php foreach ($positions as $position): ?>
+        <tr>
+          <td><?=$position['name'] ?></td>
+          <td><a href="/admin/edit_position/<?=$position['id']?>">редактировать</a></td>
+        </tr>
+      <?php endforeach; ?>
+  </table>
+</div>

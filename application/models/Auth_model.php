@@ -98,6 +98,13 @@ class Auth_model extends CI_Model {
         return $result->row_array();
     }
 
+    function get_position($position_id) {
+        $this->db->where('id', $position_id);
+        $result = $this->db->get('position');
+
+        return $result->row_array();
+    }
+
     function get_companies() {
         $result = $this->db->get('company');
         return $result->result_array();
@@ -134,6 +141,26 @@ class Auth_model extends CI_Model {
 
         $insert = $this->db->insert('company', $new_member_insert_data);
         return $insert;
+    }
+
+    function  add_position() {
+        $new_member_insert_data = array(
+            'name' => $this->input->post('name'),
+        );
+
+        $insert = $this->db->insert('position', $new_member_insert_data);
+        return $insert;
+    }
+
+    function edit_position($id) {
+        $new_member_insert_data = array(
+            'name' => $this->input->post('name'),
+        );
+
+        $this->db->set($new_member_insert_data);
+        $this->db->where('id', $id);
+        $update = $this->db->update('position');
+        return $update;
     }
 
     function edit_company($id) {
