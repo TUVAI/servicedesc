@@ -68,7 +68,7 @@ class Auth_model extends CI_Model {
             'login' => $this->input->post('username'),
             'role_id' => 6,
             'company_id' => 1,
-            'departmen_id' => 1,
+            'department_id' => 1,
             'position_id' => 1,
             'password' => sha1($this->input->post('password'))
         );

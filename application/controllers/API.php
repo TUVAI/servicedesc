@@ -7,7 +7,7 @@
  * Time: 1:15
  */
 class API extends MY_Controller {
-    protected $access = ['superadmin', 'admin'];
+    protected $access = array('superadmin', 'admin');
 
     public function index() {
 

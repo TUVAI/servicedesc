@@ -6,7 +6,7 @@
  */
 class Admin extends MY_Controller {
 
-	protected $access = ['superadmin', 'admin'];
+	protected $access = array('superadmin', 'admin');
 	
 	public function index()
 	{
